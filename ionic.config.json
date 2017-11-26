@@ -1,0 +1,8 @@
+{
+  "name": "gigler",
+  "app_id": "0f8b4679",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
