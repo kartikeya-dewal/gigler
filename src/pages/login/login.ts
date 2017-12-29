@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
-import { NavController, IonicPage } from 'ionic-angular';
+import { IonicPage } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service/auth-service';
 import { User } from '../../shared/user';
+import { LinkedInService } from '../../providers/linked-in-service/linked-in-service';
 
 @IonicPage()
 @Component({
   selector: 'page-login',
-  providers: [AuthService],
+  providers: [AuthService, LinkedInService],
   templateUrl: 'login.html',
 })
 export class LoginPage {
@@ -14,7 +15,7 @@ export class LoginPage {
   user = {} as User;
   createSuccess = false;
 
-  constructor(private nav: NavController, private authService: AuthService) {
+  constructor(private authService: AuthService, private linkedin: LinkedInService) {
 
   }
 
@@ -34,6 +35,9 @@ export class LoginPage {
     this.authService.createUser(this.user);
   }
 
+  public linkedInSignUp() {
+    this.linkedin.signUp();
+  }
 
   toggleDisplay() {
     this.isLoggingIn = !this.isLoggingIn;

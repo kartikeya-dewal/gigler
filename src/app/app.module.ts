@@ -7,7 +7,11 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { HttpModule } from '@angular/http';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { MyApp } from './app.component';
+import { LinkedIn } from '@ionic-native/linkedin';
+import { LinkedInService } from '../providers/linked-in-service/linked-in-service';
+import { TabsPageModule } from '../pages/tabs/tabs.module';
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -27,7 +31,9 @@ const firebaseConfig = {
     BrowserModule,
     HttpModule,
     AngularFireAuthModule,
+    AngularFireDatabaseModule,
     AngularFireModule.initializeApp(firebaseConfig),
+    TabsPageModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -38,7 +44,9 @@ const firebaseConfig = {
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    AuthService
+    AuthService,
+    LinkedIn,
+    LinkedInService
   ]
 })
 export class AppModule { }

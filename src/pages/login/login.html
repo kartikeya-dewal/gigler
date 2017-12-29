@@ -14,9 +14,16 @@
 
             <ion-item>
               <ion-label floating>Email</ion-label>
-              <ion-input type="text" name="email" [(ngModel)]="user.email" required></ion-input>
+              <ion-input type="email" name="email" [(ngModel)]="user.email" #userEmail="ngModel" required></ion-input>
             </ion-item>
-
+            <div class="errors" [hidden]="userEmail.valid || userEmail.untouched">
+              <div *ngIf="userEmail.errors && userEmail.errors.required">
+                Email is required
+              </div>
+              <!-- <div *ngIf="userEmail.errors && userEmail.errors.pattern">
+                Email is invalid
+              </div> -->
+            </div>
             <ion-item>
               <ion-label floating>Password</ion-label>
               <ion-input type="password" name="password" [(ngModel)]="user.password" required></ion-input>
@@ -28,8 +35,13 @@
 
       <ion-row>
         <ion-col class="signup-col">
-          <button ion-button class="submit-btn" full type="submit" [disabled]="!registerForm.form.valid" (tap)="submit(user)">{{isLoggingIn ? 'Sign in' : 'Sign up'}}</button>
-          <button ion-button class="register-btn" block clear (tap)="toggleDisplay()">{{isLoggingIn ? 'Sign up' : 'Back to login'}}</button>
+          <button ion-button class="submit-btn" full type="submit" [disabled]="!registerForm.form.valid" (tap)="submit(user)">{{isLoggingIn ? 'Sign In' : 'Sign Up'}}</button>
+          <button ion-button class="register-btn" block clear (tap)="toggleDisplay()">{{isLoggingIn ? 'Sign Up' : 'Back to login'}}</button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="linkedin-col">
+          <button ion-button class="linkedin-btn" round type="submit" (tap)="linkedInSignUp()">SignUp with LinkedIn</button>
         </ion-col>
       </ion-row>
 

@@ -1,0 +1,27 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>profile</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-grid>
+    <ion-col col-3>
+      <img src="http://placehold.it/100x100" />
+    </ion-col>
+    <ion-row>
+      <ion-label floating>First Name</ion-label>
+      <ion-input [(ngModel)]="userProfile.firstName"></ion-input>
+    </ion-row>
+
+    <ion-row>
+      <ion-label floating>Last Name</ion-label>
+      <ion-input [(ngModel)]="userProfile.lastName"></ion-input>
+    </ion-row>
+  </ion-grid>
+  <button ion-button (tap)="createUserProfile()">Create Profile</button>
+
+</ion-content>
