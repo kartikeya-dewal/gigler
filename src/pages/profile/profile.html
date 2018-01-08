@@ -1,55 +1,90 @@
 <ion-header>
-
   <ion-navbar color="primary">
-    <ion-title>Profile</ion-title>
+    <ion-row>
+      <ion-title>Profile</ion-title>
+      <button ion-button color="secondary" small (tap)="saveProfile()">Save</button>
+    </ion-row>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content padding>
+
   <ion-row>
     <ion-col col-3>
       <img src="http://placehold.it/100x100" />
     </ion-col>
-
     <ion-col>
-      <ion-row>
-        <h4>{{(profileData | async)?.firstName}} {{(profileData | async)?.lastName}}</h4>
+      <ion-row id="name">
+        <ion-input type="text" [(ngModel)]="profile.firstName" placeholder="FirstName"></ion-input>
+        <ion-input type="text" [(ngModel)]="profile.lastName" placeholder="LastName"></ion-input>
       </ion-row>
-      <ion-row>
-        <p>Headline</p>
-      </ion-row>
+      <ion-input type="text" [(ngModel)]="profile.headline" placeholder="Headline"></ion-input>
     </ion-col>
   </ion-row>
 
-  <ion-row id="summary">
-    <ion-title>Summary</ion-title>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      Ut enim ad minim veniam</p>
-  </ion-row>
+  <ion-title>Summary</ion-title>
+  <ion-item id="summary">
+    <ion-input placeholder="Professional summary" [(ngModel)]="profile.summary"></ion-input>
+  </ion-item>
 
-  <ion-row id="experience">
+  <ion-row>
     <ion-title>Experience</ion-title>
-    <p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi
-      consequatur
-    </p>
+    <button ion-button icon-only small color="secondary" (tap)="addExperience()">
+      <ion-icon name="add"></ion-icon>
+    </button>
   </ion-row>
+  <div id="experience" *ngFor="let exp of profile.experience; let i = index">
+    <ion-item id="organisation">
+      <ion-label>Organisation</ion-label>
+      <ion-input type="text" name="org{{i}}" [(ngModel)]="profile.experience[i].organisationName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>From</ion-label>
+      <ion-datetime placeholder="month year" displayFormat="MMM YYYY" name="from{{i}}" [(ngModel)]="profile.experience[i].joinedOn"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>To</ion-label>
+      <ion-datetime placeholder="month year" displayFormat="MMM YYYY" name="to{{i}}" [(ngModel)]="profile.experience[i].leftOn"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>Summary</ion-label>
+      <ion-input type="text" name="summary{{i}}" [(ngModel)]="profile.experience[i].jobDescription"></ion-input>
+    </ion-item>
+    <button ion-button color="dark" small (tap)="removeExperience(i)">Remove</button>
+  </div>
 
-  <ion-row id="education">
+  <ion-row>
     <ion-title>Education</ion-title>
-    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam,
-      eaque ipsa quae ab illo inventore veritatis</p>
+    <button ion-button icon-only small color="secondary" (tap)="addEducation()">
+      <ion-icon name="add"></ion-icon>
+    </button>
   </ion-row>
+  <div id="education" *ngFor="let exp of profile.education; let i = index">
+    <ion-item id="institution">
+      <ion-label>Institution</ion-label>
+      <ion-input type="text" [(ngModel)]="profile.education[i].institutionName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Started</ion-label>
+      <ion-datetime placeholder="month year" displayFormat="MMM YYYY" [(ngModel)]="profile.education[i].startedOn"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>Graduated</ion-label>
+      <ion-datetime placeholder="month year" displayFormat="MMM YYYY" [(ngModel)]="profile.education[i].graduatedOn"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>Degree</ion-label>
+      <ion-input type="text" [(ngModel)]="profile.education[i].degree"></ion-input>
+    </ion-item>
+    <button ion-button color="dark" small (tap)="removeEducation(i)">Remove</button>
+  </div>
 
-  <ion-row id="skills">
-    <ion-title>Skills</ion-title>
-    <p>adipisci velit, sed quia non numquam eius modi tempora</p>
-  </ion-row>
+  <ion-title>Skills</ion-title>
+  <ion-item id="skills">
+    <ion-input type="text" [(ngModel)]="profile.skills"></ion-input>
+  </ion-item>
 
-  <ion-row id="resume">
-    <ion-title>Resume</ion-title>
-    <p>Upload</p>
-  </ion-row>
+  <ion-title>Resume</ion-title>
+  <button ion-button>Upload</button>
 
 </ion-content>

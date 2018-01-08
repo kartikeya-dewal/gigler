@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { UserProfile } from '../../shared/user-profile';
+import { UserProfile } from '../../models/user-profile';
 import { LinkedIn, LinkedInLoginScopes } from '@ionic-native/linkedin';
 import { NavController } from 'ionic-angular/navigation/nav-controller';
 import { ToastController } from 'ionic-angular/components/toast/toast-controller';

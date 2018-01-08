@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage } from 'ionic-angular';
 import { ProfilePage } from '../profile/profile';
-import { SetupProfilePage } from '../setup-profile/setup-profile';
 import { MessagesPage } from '../messages/messages';
 
 @IonicPage()
@@ -12,8 +11,7 @@ import { MessagesPage } from '../messages/messages';
 export class TabsPage {
 
   tab1Root = ProfilePage;
-  tab2Root = SetupProfilePage;
-  tab3Root = MessagesPage;
+  tab2Root = MessagesPage;
 
   constructor() {
   }

@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Injectable } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { ToastController } from 'ionic-angular/components/toast/toast-controller';
-import { UserProfile } from '../../shared/user-profile';
+import { UserProfile, Experience, Education } from '../../models/user-profile';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 
@@ -13,8 +13,9 @@ import { Observable } from 'rxjs/Observable';
 })
 export class ProfilePage {
   profileData: Observable<UserProfile>;
-
+  profile: UserProfile;
   constructor(private afAuth: AngularFireAuth, private toast: ToastController, public navCtrl: NavController, public navParams: NavParams, private db: AngularFireDatabase) {
+    this.profile = new UserProfile();
   }
 
   ionViewDidLoad() {
@@ -25,6 +26,10 @@ export class ProfilePage {
           duration: 2000
         }).present();
         this.profileData = this.db.object<UserProfile>(`userProfile/${data.uid}`).valueChanges();
+        this.profileData.subscribe(data => {
+          this.profile = Object.assign(this.profile, data);
+          console.log("Profile: " + JSON.stringify(this.profile));
+        });
       }
       else {
         this.toast.create({
@@ -35,4 +40,32 @@ export class ProfilePage {
     });
   }
 
+  saveProfile() {
+    this.afAuth.authState.subscribe(auth => {
+      this.db.object(`userProfile/${auth.uid}`).set(this.profile).then(() => {
+        this.toast.create({
+          message: `Profile saved`,
+          duration: 2000
+        }).present();
+      });
+    });
+  }
+
+  addExperience() {
+    let exp = new Experience();
+    this.profile.experience.push(exp);
+  }
+
+  addEducation() {
+    let edu = new Education();
+    this.profile.education.push(edu);
+  }
+
+  removeExperience(index: number) {
+    this.profile.experience.splice(index, 1);
+  }
+
+  removeEducation(index: number) {
+    this.profile.education.splice(index, 1);
+  }
 }

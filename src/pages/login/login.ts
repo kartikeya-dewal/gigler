@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service/auth-service';
-import { User } from '../../shared/user';
+import { User } from '../../models/user';
 import { LinkedInService } from '../../providers/linked-in-service/linked-in-service';
 
 @IonicPage()
