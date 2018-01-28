@@ -29,7 +29,7 @@ export class AuthService {
       const result = await this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.password);
       console.log(result);
       if (result) {
-        this.navCtrl.setRoot('SetupProfilePage');
+        this.navCtrl.setRoot('ProfilePage');
       }
     }
     catch (e) {
