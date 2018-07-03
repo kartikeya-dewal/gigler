@@ -15,9 +15,9 @@ import { TabsPageModule } from '../pages/tabs/tabs.module';
 
 // Initialize Firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyAIwidOXG5KnxaQZZ2EdRWXYdavNAiUT1E",
-  authDomain: "gigler-1.firebaseapp.com",
-  databaseURL: "https://gigler-1.firebaseio.com",
+  apiKey: "****",
+  authDomain: "****",
+  databaseURL: "****",
   projectId: "gigler-1",
   storageBucket: "gigler-1.appspot.com",
   messagingSenderId: "1053623663815"
